@@ -1,0 +1,34 @@
+﻿@model MvcEfCodeFirstDemo.Models.Box
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Box</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<hr />
+<div>
+    <h5>Sensors</h5>
+    
+    <p>
+        <a asp-action="Add">Create New</a>
+    </p>
+
+    
+</div>
