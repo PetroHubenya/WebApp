@@ -24,9 +24,11 @@ namespace MvcEfCodeFirstDemo.Migrations
 
             modelBuilder.Entity("Models.Sensor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BoxId")
                         .HasColumnType("int");
@@ -60,6 +62,9 @@ namespace MvcEfCodeFirstDemo.Migrations
                     b.Property<Guid>("SensorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("SensorId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Timestamp")
                         .HasColumnType("datetime2");
 
@@ -68,7 +73,7 @@ namespace MvcEfCodeFirstDemo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SensorId");
+                    b.HasIndex("SensorId1");
 
                     b.ToTable("SensorsData");
                 });
@@ -103,9 +108,7 @@ namespace MvcEfCodeFirstDemo.Migrations
                 {
                     b.HasOne("Models.Sensor", null)
                         .WithMany("SensorsData")
-                        .HasForeignKey("SensorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SensorId1");
                 });
 
             modelBuilder.Entity("Models.Sensor", b =>

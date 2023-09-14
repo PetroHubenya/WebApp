@@ -28,7 +28,7 @@ namespace MvcEfCodeFirstDemo.Controllers.Sensors
         }
 
         // GET: Sensors/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Sensors == null)
             {
@@ -59,8 +59,7 @@ namespace MvcEfCodeFirstDemo.Controllers.Sensors
         public async Task<IActionResult> Create([Bind("Id,Name,Type,BoxId")] Sensor sensor)
         {
             if (ModelState.IsValid)
-            {
-                sensor.Id = Guid.NewGuid();
+            {   
                 _context.Add(sensor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -89,7 +88,7 @@ namespace MvcEfCodeFirstDemo.Controllers.Sensors
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Type,BoxId")] Sensor sensor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,BoxId")] Sensor sensor)
         {
             if (id != sensor.Id)
             {
@@ -120,7 +119,7 @@ namespace MvcEfCodeFirstDemo.Controllers.Sensors
         }
 
         // GET: Sensors/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Sensors == null)
             {
@@ -156,7 +155,7 @@ namespace MvcEfCodeFirstDemo.Controllers.Sensors
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SensorExists(Guid id)
+        private bool SensorExists(int id)
         {
           return (_context.Sensors?.Any(e => e.Id == id)).GetValueOrDefault();
         }
