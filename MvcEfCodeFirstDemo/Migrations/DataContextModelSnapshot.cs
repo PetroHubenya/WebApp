@@ -55,14 +55,7 @@ namespace MvcEfCodeFirstDemo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("SensorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SensorId1")
+                    b.Property<int>("SensorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Timestamp")
@@ -73,7 +66,7 @@ namespace MvcEfCodeFirstDemo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SensorId1");
+                    b.HasIndex("SensorId");
 
                     b.ToTable("SensorsData");
                 });
@@ -108,7 +101,9 @@ namespace MvcEfCodeFirstDemo.Migrations
                 {
                     b.HasOne("Models.Sensor", null)
                         .WithMany("SensorsData")
-                        .HasForeignKey("SensorId1");
+                        .HasForeignKey("SensorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.Sensor", b =>

@@ -51,20 +51,19 @@ namespace MvcEfCodeFirstDemo.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SensorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SensorId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<double>(type: "float", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SensorId1 = table.Column<int>(type: "int", nullable: true)
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SensorsData", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SensorsData_Sensors_SensorId1",
-                        column: x => x.SensorId1,
+                        name: "FK_SensorsData_Sensors_SensorId",
+                        column: x => x.SensorId,
                         principalTable: "Sensors",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -73,9 +72,9 @@ namespace MvcEfCodeFirstDemo.Migrations
                 column: "BoxId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SensorsData_SensorId1",
+                name: "IX_SensorsData_SensorId",
                 table: "SensorsData",
-                column: "SensorId1");
+                column: "SensorId");
         }
 
         /// <inheritdoc />

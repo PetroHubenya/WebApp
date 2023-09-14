@@ -5,11 +5,10 @@ namespace Models
     public class SensorData
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public int Id { get; set; }        
 
         [Required]
-        public Guid SensorId { get; set; }
+        public int SensorId { get; set; }
         public double Value { get; set; }
 
         [Required]
