@@ -38,6 +38,8 @@ namespace MvcEfCodeFirstDemo.Controllers.Boxes
             var box = await _context.Boxes
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            box.Sensors = await _context.Sensors.Where(s => s.BoxId == id).ToListAsync();
+
             if (box == null)
             {
                 return NotFound();
